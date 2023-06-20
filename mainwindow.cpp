@@ -333,17 +333,22 @@ void MainWindow::on_sortButton_clicked()
 
 void MainWindow::on_saveDataButton_clicked()
 {
-    QString filePath = QFileDialog::getSaveFileName(this, "Save CSV File", "", "CSV Files (*.csv)");
-
-    if (filePath.isEmpty())
-        return;
-
-    QFile file(filePath);
+    QFile file(QStandardPaths::locate(QStandardPaths::DesktopLocation, ""));
     if (!file.open(QIODevice::WriteOnly | QIODevice::Text))
     {
         QMessageBox::warning(this, "Error", "Failed to open the file for writing.");
-        return;
     }
+    // QString filePath = QFileDialog::getSaveFileName(this, "Save CSV File", "", "CSV Files (*.csv)");
+
+    // if (filePath.isEmpty())
+    //     return;
+
+    // QFile file(filePath);
+    // if (!file.open(QIODevice::WriteOnly | QIODevice::Text))
+    // {
+    //     QMessageBox::warning(this, "Error", "Failed to open the file for writing.");
+    //     return;
+    // }
 
     QTextStream stream(&file);
 
